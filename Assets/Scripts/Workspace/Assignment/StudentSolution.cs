@@ -75,8 +75,9 @@ namespace Assignment
                     }
                 }
 
-                (numbers[currentPosition], numbers[largestValueIndex]) =
-                    (numbers[largestValueIndex], numbers[currentPosition]);
+                int temporaryNumber = numbers[currentPosition];
+                numbers[currentPosition] = numbers[largestValueIndex];
+                numbers[largestValueIndex] = temporaryNumber;
             }
 
             return numbers;
@@ -84,6 +85,25 @@ namespace Assignment
 
         public int[] AS02_BubbleSortDescending(int[] numbers)
         {
+            int[] sortedNumbers = (int[])numbers.Clone();
+
+            for (int pass = 0; pass < sortedNumbers.Length - 1; pass++)
+            {
+                for (int currentIndex = 0; currentIndex < sortedNumbers.Length - 1 - pass; currentIndex++)
+                {
+                    if (sortedNumbers[currentIndex] > sortedNumbers[currentIndex + 1])
+                    {
+                        int temporaryNumber = sortedNumbers[currentIndex];
+                        sortedNumbers[currentIndex] = sortedNumbers[currentIndex + 1];
+                        sortedNumbers[currentIndex + 1] = temporaryNumber;
+                    }
+                }
+            }
+
+            foreach (int number in sortedNumbers)
+            {
+                Debug.Log(number);
+            }
             return numbers;
         }
 
