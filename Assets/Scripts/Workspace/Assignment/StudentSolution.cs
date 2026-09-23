@@ -12,7 +12,7 @@ namespace Assignment
         public int[] LCT01_SelectionSortAscending(int[] numbers)
         {
             for (int i = 0; i < numbers.Length - 1; i++)
-            {
+            { 
                 int minIndex = i;
                 for (int j = i + 1; j < numbers.Length; j++)
                 {
@@ -63,6 +63,22 @@ namespace Assignment
 
         public int[] AS01_SelectionSortDescending(int[] numbers)
         {
+            for (int currentPosition = 0; currentPosition < numbers.Length - 1; currentPosition++)
+            {
+                int largestValueIndex = currentPosition;
+
+                for (int searchIndex = currentPosition + 1; searchIndex < numbers.Length; searchIndex++)
+                {
+                    if (numbers[searchIndex] > numbers[largestValueIndex])
+                    {
+                        largestValueIndex = searchIndex;
+                    }
+                }
+
+                (numbers[currentPosition], numbers[largestValueIndex]) =
+                    (numbers[largestValueIndex], numbers[currentPosition]);
+            }
+
             return numbers;
         }
 
