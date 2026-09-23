@@ -91,7 +91,7 @@ namespace Assignment
             {
                 for (int currentIndex = 0; currentIndex < sortedNumbers.Length - 1 - pass; currentIndex++)
                 {
-                    if (sortedNumbers[currentIndex] > sortedNumbers[currentIndex + 1])
+                    if (sortedNumbers[currentIndex] < sortedNumbers[currentIndex + 1])
                     {
                         int temporaryNumber = sortedNumbers[currentIndex];
                         sortedNumbers[currentIndex] = sortedNumbers[currentIndex + 1];
@@ -104,17 +104,75 @@ namespace Assignment
             {
                 Debug.Log(number);
             }
-            return numbers;
+            return sortedNumbers;
         }
 
         public int[] AS03_InsertionSortDescending(int[] numbers)
         {
-            return numbers;
+            int[] sortedNumbers = (int[])numbers.Clone();
+
+            for (int currentIndex = 1; currentIndex < sortedNumbers.Length; currentIndex++)
+            {
+                int numberToInsert = sortedNumbers[currentIndex];
+                int searchIndex = currentIndex - 1;
+
+                while (searchIndex >= 0 && sortedNumbers[searchIndex] < numberToInsert)
+                {
+                    sortedNumbers[searchIndex + 1] = sortedNumbers[searchIndex];
+                    searchIndex--;
+                }
+
+                sortedNumbers[searchIndex + 1] = numberToInsert;
+            }
+
+            foreach (int number in sortedNumbers)
+            {
+                Debug.Log(number);
+            }
+
+            return sortedNumbers;
         }
 
         public int AS04_FindTheSecondLargestNumber(int[] numbers)
         {
-            return 0;
+            if (numbers.Length < 2)
+            {
+                return 0;
+            }
+
+            int largestNumber = int.MinValue;
+            int secondLargestNumber = int.MinValue;
+            bool hasLargestNumber = false;
+            bool hasSecondLargestNumber = false;
+
+            foreach (int number in numbers)
+            {
+                if (!hasLargestNumber)
+                {
+                    largestNumber = number;
+                    hasLargestNumber = true;
+                }
+                else if (number > largestNumber)
+                {
+                    secondLargestNumber = largestNumber;
+                    hasSecondLargestNumber = true;
+                    largestNumber = number;
+                }
+                else if (number < largestNumber &&
+                         (!hasSecondLargestNumber || number > secondLargestNumber))
+                {
+                    secondLargestNumber = number;
+                    hasSecondLargestNumber = true;
+                }
+            }
+
+            if (!hasSecondLargestNumber)
+            {
+                return 0;
+            }
+
+            Debug.Log(secondLargestNumber);
+            return secondLargestNumber;
         }
 
         #endregion
