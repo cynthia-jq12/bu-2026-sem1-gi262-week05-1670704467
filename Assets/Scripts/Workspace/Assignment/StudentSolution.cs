@@ -63,24 +63,31 @@ namespace Assignment
 
         public int[] AS01_SelectionSortDescending(int[] numbers)
         {
-            for (int currentPosition = 0; currentPosition < numbers.Length - 1; currentPosition++)
-            {
-                int largestValueIndex = currentPosition;
+            int[] sortedNumbers = (int[])numbers.Clone();
 
-                for (int searchIndex = currentPosition + 1; searchIndex < numbers.Length; searchIndex++)
+            for (int currentPosition = 0; currentPosition < sortedNumbers.Length - 1; currentPosition++)
+            {
+                int largestNumberIndex = currentPosition;
+
+                for (int searchIndex = currentPosition + 1; searchIndex < sortedNumbers.Length; searchIndex++)
                 {
-                    if (numbers[searchIndex] > numbers[largestValueIndex])
+                    if (sortedNumbers[searchIndex] > sortedNumbers[largestNumberIndex])
                     {
-                        largestValueIndex = searchIndex;
+                        largestNumberIndex = searchIndex;
                     }
                 }
 
-                int temporaryNumber = numbers[currentPosition];
-                numbers[currentPosition] = numbers[largestValueIndex];
-                numbers[largestValueIndex] = temporaryNumber;
+                int currentNumber = sortedNumbers[currentPosition];
+                sortedNumbers[currentPosition] = sortedNumbers[largestNumberIndex];
+                sortedNumbers[largestNumberIndex] = currentNumber;
             }
 
-            return numbers;
+            foreach (int number in sortedNumbers)
+            {
+                Debug.Log(number);
+            }
+
+            return sortedNumbers;
         }
 
         public int[] AS02_BubbleSortDescending(int[] numbers)
